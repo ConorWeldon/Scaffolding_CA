@@ -1,9 +1,15 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
-const seedDB = require('./utils/faker_employees.js');
-const seedDB2 = require('./utils/faker_status.js');
+
 const app = express();
 const port = 3000;
+
+const seedDB = require('./utils/faker_employees.js');
+const seedDB2 = require('./utils/faker_status.js');
+const seedDB3 = require('./utils/faker_contract.js');
+const seedDB4 = require('./utils/faker_equipment.js');
+const seedDB5 = require('./utils/faker_emergency_contacts.js');
+const seedDB6 = require('./utils/faker_companies.js');
 
 require('dotenv').config();
 require('./utils/db.js')();
@@ -69,7 +75,7 @@ app.delete('/', (req, res) => {
 
 //This is called a route middleware
 app.use('/api/employees', require('./routes/employee'));
-app.use('/api/contract', require('./routes/contract'));
+app.use('/api/contracts', require('./routes/contract'));
 app.use('/api/company', require('./routes/company'));
 app.use('/api/emergencyContact', require('./routes/emergency_contact'));
 app.use('/api/equipment', require('./routes/equipment'));

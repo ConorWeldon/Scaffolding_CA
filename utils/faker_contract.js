@@ -8,7 +8,7 @@ function randomIntFromInterval(min, max) { // min and max included
     return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
-async function seedDB2() {
+async function seedDB4() {
     // Connection URL
     // require('dotenv').config();
     // require('./db.js')();
@@ -24,17 +24,22 @@ async function seedDB2() {
         //await client.connect();
         console.log("Connected correctly to server");
 
-        const collection = client.db("PremiumScaffolding").collection("status");
+        const collection = client.db("PremiumScaffolding").collection("contracts");
 
         //console.log("im here");
 
         // make a bunch of time series data
-        let timeSeriesData2 = [];
+        let timeSeriesData3 = [];
 
         for (let i = 0; i < 10; i++) {
-            let newStatus = {
+            const first_name = faker.name.firstName();
+            const last_name = faker.name.lastName();
+            let newContract = {
                 name: faker.name.firstName() + faker.name.lastName(),
                 description: faker.commerce.productDescription(),
+                start_date: faker.date.past(),
+                end_date: faker.date.future(),
+                cost: faker.random.numeric(),
                 timestamp_day: faker.date.past(),
                 // owner: {
                 //     email: faker.internet.email(first_name, last_name),
@@ -50,11 +55,11 @@ async function seedDB2() {
                     weight: randomIntFromInterval(14,16),
                 }
             }
-            timeSeriesData2.push(newStatus);
+            timeSeriesData3.push(newContract);
         }
-        collection.insertMany(timeSeriesData2);
+        collection.insertMany(timeSeriesData3);
 
-        console.log("Status seeded! :)");
+        console.log("Contract seeded! :)");
         client.close();
     } catch (err) {
         console.log(err.stack);
@@ -62,7 +67,7 @@ async function seedDB2() {
 
 }
 
-seedDB2();
+seedDB4();
 
 //Exporting the entire connect function in which I later call and use in the server.js file
 // module.exports = seedDB;

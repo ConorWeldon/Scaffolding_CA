@@ -1,5 +1,5 @@
 const express = require('express');
-const { loginRequired } = require('../controllers/auth_controllers');
+const { loginRequired, accessRequired } = require('../controllers/auth_controllers');
 const router = express.Router();
 
 //Middleware for uploading and getting images
@@ -29,7 +29,7 @@ const { register,
 //We are using post method because we are sending form data
 router
     .get('/', readEmployeeData)
-    .get('/:id', loginRequired, readOne)
+    .get('/:id', accessRequired, readOne)
     .post('/', imageUpload.single('image'), createData)
     .put('/:id', imageUpload.single('image'), updateData)
     .delete('/:id', deleteData)

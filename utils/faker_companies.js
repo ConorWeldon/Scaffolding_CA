@@ -8,7 +8,7 @@ function randomIntFromInterval(min, max) { // min and max included
     return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
-async function seedDB2() {
+async function seedDB6() {
     // Connection URL
     // require('dotenv').config();
     // require('./db.js')();
@@ -22,19 +22,28 @@ async function seedDB2() {
 
     try {
         //await client.connect();
-        console.log("Connected correctly to server");
+        console.log("Attempting to seed Equipment");
 
-        const collection = client.db("PremiumScaffolding").collection("status");
+        const collection = client.db("PremiumScaffolding").collection("companies");
 
         //console.log("im here");
 
+        // The drop() command destroys all data from a collection.
+        // Make sure you run it against proper database and collection.
+        // collection.drop();
+
         // make a bunch of time series data
-        let timeSeriesData2 = [];
+        let timeSeriesData3 = [];
 
         for (let i = 0; i < 10; i++) {
-            let newStatus = {
-                name: faker.name.firstName() + faker.name.lastName(),
-                description: faker.commerce.productDescription(),
+            const name = faker.company.name();
+            let newContract = {
+                name: name,
+                email: faker.internet.email(name),
+                password: faker.internet.password(),
+                mobile_number: faker.phone.number(),
+                office_contact: faker.phone.number(),
+                location: faker.address.streetAddress(),
                 timestamp_day: faker.date.past(),
                 // owner: {
                 //     email: faker.internet.email(first_name, last_name),
@@ -50,11 +59,11 @@ async function seedDB2() {
                     weight: randomIntFromInterval(14,16),
                 }
             }
-            timeSeriesData2.push(newStatus);
+            timeSeriesData3.push(newContract);
         }
-        collection.insertMany(timeSeriesData2);
+        collection.insertMany(timeSeriesData3);
 
-        console.log("Status seeded! :)");
+        console.log("Companies seeded! :)");
         client.close();
     } catch (err) {
         console.log(err.stack);
@@ -62,7 +71,7 @@ async function seedDB2() {
 
 }
 
-seedDB2();
+seedDB6();
 
 //Exporting the entire connect function in which I later call and use in the server.js file
 // module.exports = seedDB;

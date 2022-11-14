@@ -6,14 +6,16 @@ const companySchema = Schema(
     {
         name: {
             type: String,
-            required: [true, 'First Name field is required'],
+            required: [true, 'Name field is required'],
             //Trim removes an unnecessary spaces at the start or end
             trim: true
         },
         email: {
             type: String,
             required: [true, 'Email field is required'],
+            //Unique makes sure that their can be no duplicates
             unique: [true, 'Email already exists, must use a new email'],
+            //Lower case makes the entire string lowercase
             lowercase: true,
             trim: true
         },
@@ -28,7 +30,7 @@ const companySchema = Schema(
         },
         office_contact: {
             type: Number,
-            required: [true, 'Emergancy contact field is required'],
+            required: [true, 'Office contact field is required'],
             trim: true
         },
         location: {

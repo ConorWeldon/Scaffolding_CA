@@ -1,9 +1,9 @@
 const access = (req, res) => {
     Employee.findOne({
-        access: req.body.access_level
+        accessLevel: req.body.access_level
     })
     .then((employee) => {
-    if (!employee || employee(req.body.password) !== 1) {
+    if (employee.accessLevel >= 4) {
             res.status(401).json({
                 msg: 'Authentication failed. Invalid you dont have access to this section.'
             });

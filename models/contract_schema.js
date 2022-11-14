@@ -6,39 +6,36 @@ const contractSchema = Schema(
     {
         name: {
             type: String,
-            required: [true, 'First Name field is required'],
+            required: [true, 'Name field is required'],
             //Trim removes an unnecessary spaces at the start or end
             trim: true
         },
         description: {
             type: String,
-            required: [true, 'Second Name field is required'],
+            required: [true, 'Description field is required'],
             trim: true
         },
         start_date: {
             type: String,
-            required: [true, 'Second Name field is required'],
+            required: [true, 'Start Date field is required'],
             trim: true
         },
         end_date: {
             type: String,
-            required: [true, 'Email field is required'],
-            unique: [true, 'Email already exists, must use a new email'],
-            lowercase: true,
             trim: true
         },
         cost: {
             type: String,
-            required: [true, 'password field is required']
+            required: [true, 'Cost field is required']
         },
         contact_id: {
             type: Number,
-            required: [true, 'Mobile number field is required'],
+            required: [true, 'Contact id field is required'],
             trim: true
         },
         contractor: {
             type: Number,
-            required: [true, 'Emergancy contact field is required'],
+            required: [true, 'Contractor field is required'],
             trim: true
         }
     },

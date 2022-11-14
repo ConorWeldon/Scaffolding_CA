@@ -28,7 +28,7 @@ async function seedDB() {
 
         // The drop() command destroys all data from a collection.
         // Make sure you run it against proper database and collection.
-        collection.drop();
+        //collection.drop();
 
         // console.log(faker.name.lastName(""));
 
@@ -39,8 +39,8 @@ async function seedDB() {
             const first_name = faker.name.firstName();
             const last_name = faker.name.lastName();
             let newEmployee = {
-                first_name: faker.name.firstName(),
-                last_name: faker.name.lastName(),
+                first_name: first_name,
+                last_name: last_name,
                 dob: faker.date.birthdate(),
                 email: faker.internet.email(first_name, last_name),
                 password: faker.internet.password(),
@@ -49,6 +49,7 @@ async function seedDB() {
                     first_name,
                     last_name,
                     email: faker.internet.email(first_name, last_name),
+                    emergency_contact: faker.phone.number(),
                 },
                 role: faker.name.jobDescriptor(),
                 access_level: randomIntFromInterval(1,10),
@@ -71,7 +72,7 @@ async function seedDB() {
         }
         collection.insertMany(timeSeriesData);
 
-        console.log("Database seeded! :)");
+        console.log("Employee seeded! :)");
         client.close();
     } catch (err) {
         console.log(err.stack);

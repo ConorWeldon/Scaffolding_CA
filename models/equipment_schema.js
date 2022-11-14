@@ -6,30 +6,33 @@ const equipmentSchema = Schema(
     {
         name: {
             type: String,
-            required: [true, 'First Name field is required'],
+            required: [true, 'Name field is required'],
             //Trim removes an unnecessary spaces at the start or end
             trim: true
         },
         amount: {
             type: Number,
-            required: [true, 'Second Name field is required'],
+            required: [true, 'Amount field is required'],
             trim: true
         },
         description: {
             type: String,
-            required: [true, 'Second Name field is required'],
+            required: [true, 'Description field is required'],
+            trim: true
+        },
+        category: {
+            type: String,
+            required: [true, 'Category field is required'],
             trim: true
         },
         equipment_status: {
             type: String,
-            required: [true, 'Email field is required'],
-            unique: [true, 'Email already exists, must use a new email'],
-            lowercase: true,
+            required: [true, 'Equipment Status field is required'],
             trim: true
         },
         status_id: {
             type: String,
-            required: [true, 'password field is required']
+            required: [true, 'status field is required']
         }
     },
 
