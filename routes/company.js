@@ -20,7 +20,7 @@ const { register,
 //We are using post method because we are sending form data
 router
     .get('/', readCompanyData)
-    .get('/:id', loginRequired, readOne)
+    .get('/:id', readOne)
     .post('/', createData)
     .post('/register', register)
     .post('/login', login)

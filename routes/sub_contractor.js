@@ -5,7 +5,7 @@ const router = express.Router();
 // import sub_contractor_controller. curly braces is where you specify what ur importing
 const { register,
     login,
-    readSubContractorData,
+    readSub_ContractorData,
     readOne,
     createData
 } = require('../controllers/sub_contractor_controller');
@@ -19,7 +19,7 @@ const { register,
 
 //We are using post method because we are sending form data
 router
-    .get('/', readSubContractorData)
+    .get('/', readSub_ContractorData)
     .get('/:id', loginRequired, readOne)
     .post('/', createData)
     .post('/register', register)

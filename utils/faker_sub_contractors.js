@@ -8,7 +8,7 @@ function randomIntFromInterval(min, max) { // min and max included
     return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
-async function seedDB() {
+async function seedDB7() {
     // Connection URL
     // require('dotenv').config();
     // require('./db.js')();
@@ -22,43 +22,33 @@ async function seedDB() {
 
     try {
         //await client.connect();
-        console.log("Connected correctly to server");
+        console.log("Attempting to seed Sub Contractor");
 
-        const collection = client.db("PremiumScaffolding").collection("employees");
+        const collection = client.db("PremiumScaffolding").collection("sub_contractors");
+
+        //console.log("im here");
 
         // The drop() command destroys all data from a collection.
         // Make sure you run it against proper database and collection.
-        //collection.drop();
-
-        // console.log(faker.name.lastName(""));
+        // collection.drop();
 
         // make a bunch of time series data
-        let timeSeriesData = [];
+        let timeSeriesData3 = [];
 
         for (let i = 0; i < 10; i++) {
-            const first_name = faker.name.firstName();
-            const last_name = faker.name.lastName();
-            let newEmployee = {
-                first_name: first_name,
-                last_name: last_name,
-                dob: faker.date.birthdate(),
-                email: faker.internet.email(first_name, last_name),
-                password: faker.internet.password(),
-                mobile_number: faker.phone.number(),
-                emergancy_contact: {
-                    first_name,
-                    last_name,
-                    email: faker.internet.email(first_name, last_name),
-                    emergency_contact: faker.phone.number(),
-                },
-                role: faker.name.jobDescriptor(),
-                access_level: randomIntFromInterval(1,10),
-                garda_vetting: faker.image.abstract(),
-                timestamp_day: faker.date.past(),
-                // emergancy_contacts: {
+            const name = faker.company.name()
+            let newContract = {
+                name: name,
+                description: faker.commerce.productDescription(),
+                start_date: faker.date.past(),
+                end_date: faker.date.future(),
+                cost: faker.random.numeric(),
+                contract_id: randomIntFromInterval(1,100),
+                contractor: faker.name.firstName(),
+                // owner: {
+                //     email: faker.internet.email(first_name, last_name),
                 //     first_name,
                 //     last_name,
-                //     email: faker.internet.email(first_name, last_name),
                 // },
                 // events: [],
             };
@@ -69,11 +59,11 @@ async function seedDB() {
                     weight: randomIntFromInterval(14,16),
                 }
             }
-            timeSeriesData.push(newEmployee);
+            timeSeriesData3.push(newContract);
         }
-        collection.insertMany(timeSeriesData);
+        collection.insertMany(timeSeriesData3);
 
-        console.log("Employee seeded! :)");
+        console.log("Emergency Contacts seeded! :)");
         client.close();
     } catch (err) {
         console.log(err.stack);
@@ -81,7 +71,7 @@ async function seedDB() {
 
 }
 
-seedDB();
+seedDB7();
 
 //Exporting the entire connect function in which I later call and use in the server.js file
 // module.exports = seedDB;

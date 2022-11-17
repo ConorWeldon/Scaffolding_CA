@@ -3,7 +3,7 @@ const bcrypt = require('bcryptjs');                                             
 const jwt = require('jsonwebtoken');                                                  //Jsonwebtoken (jwt) is what is creating my tokens and verifying them
 // const { update } = require('../models/employee_schema.js');
 
-//Used to access mogo history for our old data
+//Used to access mongo history for our old data
 const fs = require('fs');
 
 const deleteImage = (filename) => {
@@ -140,9 +140,20 @@ const readOne = (req, res) => {
 };
 
 const createData = (req, res) => {
-    console.log(req.body);
+    // console.log(req.body);
     let employeeData = req.body;
     // data.id = 1;
+    console.log(employeeData.garda_vetting);
+    //If the employee data has a file, then I want the image path to be the file name
+    if (req.file) {
+        employeeData.garda_vetting = req.file.filename;
+    }
+    //Include this 'else' only if image is required 
+    else {
+        return res.status(422).json({
+            message: req.imageError || "No Image was uploaded!"
+        });
+    }
 
     Employee.create(employeeData)
         .then((data) => {
@@ -161,7 +172,10 @@ const createData = (req, res) => {
             if(error.name === 'ValidationError') {
                 console.error('Validation Error!!', error);
                 //422 means unprocessable entity
-                res.status(422).json(error);
+                res.status(422).json({
+                    "msg": "Validation Error",
+                    "error" : error.message 
+                });
             } else {
                 console.error(error);
                 //500 means its a server error

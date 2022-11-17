@@ -29,7 +29,7 @@ const { register,
 //We are using post method because we are sending form data
 router
     .get('/', readEmployeeData)
-    .get('/:id', accessRequired, readOne)
+    .get('/:id', loginRequired, readOne)
     .post('/', imageUpload.single('image'), createData)
     .put('/:id', imageUpload.single('image'), updateData)
     .delete('/:id', deleteData)

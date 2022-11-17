@@ -80,7 +80,7 @@ app.use('/api/company', require('./routes/company'));
 app.use('/api/emergencyContact', require('./routes/emergency_contact'));
 app.use('/api/equipment', require('./routes/equipment'));
 app.use('/api/status', require('./routes/status'));
-// app.use('/api/subContractor', require('./routes/sub_contractor'));
+app.use('/api/subContractor', require('./routes/sub_contractor'));
 app.use('/api/festivals', require('./routes/festivals'));
 
 
