@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken');
 const app = express();
 const port = 3000;
 
+//Seeding for my DB
 const seedDB = require('./utils/faker_employees.js');
 const seedDB2 = require('./utils/faker_status.js');
 const seedDB3 = require('./utils/faker_contract.js');
